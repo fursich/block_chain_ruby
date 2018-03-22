@@ -5,11 +5,11 @@ require 'openssl'
 
 class KeyGenerator
   def initialize
-    generate_private_key
+    generate_private_key!
   end
 
   def public_key
-    @public_key ||= generate_public_key
+    @public_key ||= generate_public_key!
   end
 
   def save_private_key!(file)
@@ -23,12 +23,12 @@ class KeyGenerator
   private
 
   # 楕円曲線Secp256k1によるEC秘密鍵作成
-  def generate_private_key
+  def generate_private_key!
     @private_key = OpenSSL::PKey::EC.new("secp256k1").generate_key
   end
 
   # 公開鍵は秘密鍵インスタンスと同じオブジェクトで、private_key = nilとすると作成できる
-  def generate_public_key
+  def generate_public_key!
     @private_key
     public_key = @private_key.dup
     public_key.private_key = nil
@@ -44,4 +44,3 @@ module Pem
     ::OpenSSL::PKey::EC.new File.read(file)
   end
 end
-

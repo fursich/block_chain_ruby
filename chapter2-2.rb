@@ -1,4 +1,4 @@
-require './common.rb'
+require_relative 'lib/key.rb'
 
 private_key = Pem.read('./keys/private_key.pem')
 public_key = Pem.read('./keys/public_key.pem')
@@ -72,5 +72,3 @@ digest               = OpenSSL::Digest::SHA256.new.digest(fake_message) # 受信
 verification_result  = fake_public_key.dsa_verify_asn1(digest, fake_signature) # メッセージの真偽を確認
 
 puts "メッセージ（偽造鍵） 署名検証結果: #{verification_result}"
-
-

@@ -1,5 +1,5 @@
-require './common.rb'
 require 'fileutils'
+require_relative 'lib/key.rb'
 
 FileUtils.mkdir_p './keys'
 
@@ -10,5 +10,3 @@ my_key.save_public_key!('keys/public_key.pem')
 fake_key = KeyGenerator.new
 fake_key.save_private_key!('keys/fake_private_key.pem')
 fake_key.save_public_key!('keys/fake_public_key.pem')
-
-
